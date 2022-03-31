@@ -21,6 +21,17 @@ module.exports.config = {
     ],
     templates: [],
   },
+  "optimism": {
+    dataSources: [
+      {
+        name: "wrapNZap",
+        template: "wrapNZap-ds.yaml",
+        address: "0x5D1ADccB9092eFc65E094Dd8972Bc0d9224b3C41",
+        startBlock: 4865606, // TODO see PR details - not sure if this is correct.
+      },
+    ],
+    templates: [],
+  },
   celo: {
     dataSources: [
       {
