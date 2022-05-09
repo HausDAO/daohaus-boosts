@@ -91,6 +91,12 @@ module.exports.config = {
         address: "0x8464135c8F25Da09e49BC8782676a84730C318bC",
         startBlock: 15518416,
       },
+      {
+        name: "molochToken",
+        template: "molochToken-ds.yaml",
+        address: "0xF89e2f69FB1351D37b9F82e77bbF10A02cdC5042",
+        startBlock: 21604012,
+      }
     ],
     templates: [
       {

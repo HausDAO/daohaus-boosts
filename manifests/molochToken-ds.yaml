@@ -1,0 +1,20 @@
+kind: ethereum/contract
+name: MolochTokenFactory
+network: optimism
+source:
+  address: "" # TODO fill out after wrap and zap deploy
+  abi: MolochTokenFactory
+  startBlock: # TODO fill out after wrap and zap deploy
+mapping:
+  kind: ethereum/events
+  apiVersion: 0.0.3
+  language: wasm/assemblyscript
+  entities:
+    - MolochToken
+  abis:
+    - name: MolochTokenFactory
+      file: ./abis/MolochTokenFactory.json
+  eventHandlers:
+    - event: MolochTokenCreated(address,address,string,string)
+      handler: handleNewMolochToken
+  file: ./src/moloch-token-mappings.ts

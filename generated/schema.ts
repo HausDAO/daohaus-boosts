@@ -218,3 +218,86 @@ export class MolochTransaction extends Entity {
     this.set("createdAt", Value.fromString(value));
   }
 }
+
+export class MolochToken extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id !== null, "Cannot save MolochToken entity without an ID");
+    assert(
+      id.kind == ValueKind.STRING,
+      "Cannot save MolochToken entity with non-string ID. " +
+        'Considering using .toHex() to convert the "id" to a string.'
+    );
+    store.set("MolochToken", id.toString(), this);
+  }
+
+  static load(id: string): MolochToken | null {
+    return store.get("MolochToken", id) as MolochToken | null;
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get moloch(): Bytes {
+    let value = this.get("moloch");
+    return value.toBytes();
+  }
+
+  set moloch(value: Bytes) {
+    this.set("moloch", Value.fromBytes(value));
+  }
+
+  get name(): string | null {
+    let value = this.get("name");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set name(value: string | null) {
+    if (value === null) {
+      this.unset("name");
+    } else {
+      this.set("name", Value.fromString(value as string));
+    }
+  }
+
+  get symbol(): string | null {
+    let value = this.get("symbol");
+    if (value === null || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set symbol(value: string | null) {
+    if (value === null) {
+      this.unset("symbol");
+    } else {
+      this.set("symbol", Value.fromString(value as string));
+    }
+  }
+
+  get decimals(): BigInt {
+    let value = this.get("decimals");
+    return value.toBigInt();
+  }
+
+  set decimals(value: BigInt) {
+    this.set("decimals", Value.fromBigInt(value));
+  }
+}

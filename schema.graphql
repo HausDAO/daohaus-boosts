@@ -19,3 +19,10 @@ type MolochTransaction @entity {
   id: ID!
   createdAt: String!
 }
+
+type MolochToken @entity {
+  id: ID!
+  moloch: Bytes! # address
+  name: String
+  symbol: String
+}
