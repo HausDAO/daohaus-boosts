@@ -5,12 +5,53 @@ schema:
   file: schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: WrapNZapFactory
-    network: optimism
+    name: TransmutationFactory
+    network: xdai
     source:
-      address: "0x5D1ADccB9092eFc65E094Dd8972Bc0d9224b3C41"
+      address: "0x2BE7130DF2Ba6822464900cBD818BcDB8cf73d09"
+      abi: TransmutationFactory
+      startBlock: 11814810
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Deployment
+      abis:
+        - name: TransmutationFactory
+          file: TransmutationFactory/abis/TransmutationFactory.json
+      eventHandlers:
+        - event: Deployment(address,address,address,address,address)
+          handler: handleTransmutationDeployment
+      file: TransmutationFactory/TransmutationFactory.wasm
+  - kind: ethereum/contract
+    name: TransmutationV2Factory
+    network: xdai
+    source:
+      address: "0x7F94ec015665743fE84A7f59297eD86A0470e069"
+      abi: TransmutationV2Factory
+      startBlock: 14846276
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - SummonTransmutation
+      abis:
+        - name: TransmutationV2Factory
+          file: TransmutationV2Factory/abis/TransmutationV2Factory.json
+      eventHandlers:
+        - event: SummonTransmutation(indexed address,indexed address,indexed
+            address,string,address,address)
+          handler: handleSummonTransmutation
+      file: TransmutationFactory/TransmutationFactory.wasm
+  - kind: ethereum/contract
+    name: WrapNZapFactory
+    network: xdai
+    source:
+      address: "0x8464135c8F25Da09e49BC8782676a84730C318bC"
       abi: WrapNZapFactory
-      startBlock: 4865606
+      startBlock: 15518416
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.4
@@ -24,4 +65,42 @@ dataSources:
         - event: NewWrapNZap(address,address,address)
           handler: handleNewWrapNZap
       file: WrapNZapFactory/WrapNZapFactory.wasm
-templates: []
+  - kind: ethereum/contract
+    name: MolochTokenFactory
+    network: xdai
+    source:
+      address: "0xF89e2f69FB1351D37b9F82e77bbF10A02cdC5042"
+      abi: MolochTokenFactory
+      startBlock: 21604012
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - MolochToken
+      abis:
+        - name: MolochTokenFactory
+          file: MolochTokenFactory/abis/MolochTokenFactory.json
+      eventHandlers:
+        - event: MolochTokenCreated(address,address,string,string)
+          handler: handleNewMolochToken
+      file: MolochTokenFactory/MolochTokenFactory.wasm
+templates:
+  - kind: ethereum/contract
+    name: TransmutationTemplate
+    network: xdai
+    source:
+      abi: Transmutation
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      file: templates/TransmutationTemplate/TransmutationTemplate.wasm
+      entities:
+        - Transmutation
+      abis:
+        - name: Transmutation
+          file: TransmutationTemplate/abis/Transmutation.json
+      eventHandlers:
+        - event: Deploy(address,address,address,address)
+          handler: handleDeploy
