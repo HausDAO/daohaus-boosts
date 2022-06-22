@@ -39,7 +39,7 @@ module.exports.config = {
         name: "wrapNZap",
         template: "wrapNZap-ds.yaml",
         address: "0x5D1ADccB9092eFc65E094Dd8972Bc0d9224b3C41",
-        startBlock: 4865606, // TODO see PR details - not sure if this is correct.
+        startBlock: 4865606,
       },
       {
         name: "molochToken",
@@ -142,6 +142,17 @@ module.exports.config = {
         template: "molochToken-ds.yaml",
         address: "0x12d1a14c06c3b75e541ec7e30a87e13beeda2965",
         startBlock: 10647267,
+      },
+    ],
+    templates: [],
+  },
+  goerli: {
+    dataSources: [
+      {
+        name: "wrapNZap",
+        template: "wrapNZap-ds.yaml",
+        address: "0x5D1ADccB9092eFc65E094Dd8972Bc0d9224b3C41",
+        startBlock: 7102776,
       },
     ],
     templates: [],
