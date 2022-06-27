@@ -1,6 +1,6 @@
 kind: ethereum/contract
 name: WrapNZapFactory
-network: optimism
+network:
 source:
   address: "" # TODO fill out after wrap and zap deploy
   abi: WrapNZapFactory
